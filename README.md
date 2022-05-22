@@ -1,6 +1,5 @@
 # ShineClient
 This is cheat client for minecraft wiiu edition.
-created by Clover!
 
 # How to build
 please execute the build.py
