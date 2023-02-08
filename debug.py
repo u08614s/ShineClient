@@ -10,10 +10,10 @@ address=0x4CC0000
 code=""
 offset=0
 
-popen = subprocess.Popen('assemble\\build.bat',shell=True)
+popen = subprocess.Popen('assemble/build.bat',shell=True)
 popen.wait()
 
-with open("assemble\\asm",'rb') as f:
+with open("assemble/asm",'rb') as f:
     tmp=f.read()
     f.close()
 tmp=tmp.hex().upper()
@@ -29,7 +29,7 @@ for x in range(len(s)):
 
 code=code[:-1]
 
-with open("scripts\\main",'w') as f:
+with open("scripts/main",'w') as f:
     f.write(code)
     f.close()
 
@@ -39,31 +39,31 @@ s.connect((ip,7331))
 print("connected"+ip)
 
 sends=[]
-with open("scripts\\api-CodeEnablesSetter") as f:
+with open("scripts/api-CodeEnablesSetter") as f:
     sends=f.readlines()
     f.close
-with open("scripts\\api-Resetter") as f:
+with open("scripts/api-Resetter") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\api-GetHackItems") as f:
+with open("scripts/api-GetHackItems") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\api-GetHackItems2") as f:
+with open("scripts/api-GetHackItems2") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\api-RainbowArmor") as f:
+with open("scripts/api-RainbowArmor") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\api-Nuker") as f:
+with open("scripts/api-Nuker") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\main") as f:
+with open("scripts/main") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\api-ArgSetter") as f:
+with open("scripts/api-ArgSetter") as f:
     sends=sends+f.readlines()
     f.close
-with open("scripts\\Run") as f:
+with open("scripts/Run") as f:
     sends=sends+f.readlines()
     f.close
 
