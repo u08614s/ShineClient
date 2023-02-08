@@ -7,10 +7,10 @@ address=0x4CC0000
 code=""
 offset=0
 
-popen = subprocess.Popen('assemble\\build.bat',shell=True)
+popen = subprocess.Popen('assemble/build.bat',shell=True)
 popen.wait()
 
-with open("assemble\\asm",'rb') as f:
+with open("assemble/asm",'rb') as f:
     tmp=f.read()
     f.close()
 tmp=tmp.hex().upper()
@@ -26,46 +26,46 @@ for x in range(len(s)):
 
 code=code[:-1]
 
-with open("scripts\\main",'w') as f:
+with open("scripts/main",'w') as f:
     f.write(code)
     f.close()
 
 time.sleep(0.1)
 
 sends=[]
-with open("scripts\\api-CodeEnablesSetter") as f:
+with open("scripts/api-CodeEnablesSetter") as f:
     sends=f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-Resetter") as f:
+with open("scripts/api-Resetter") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-GetHackItems") as f:
+with open("scripts/api-GetHackItems") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-GetHackItems2") as f:
+with open("scripts/api-GetHackItems2") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-RainbowArmor") as f:
+with open("scripts/api-RainbowArmor") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-Nuker") as f:
+with open("scripts/api-Nuker") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\main") as f:
+with open("scripts/main") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\api-ArgSetter") as f:
+with open("scripts/api-ArgSetter") as f:
     sends=sends+f.readlines()
     sends.append('\n')
     f.close
-with open("scripts\\Run") as f:
+with open("scripts/Run") as f:
     sends=sends+f.readlines()
     f.close
 
@@ -79,18 +79,18 @@ for x in range(len(sends)):
                 code=code+"int value"+str(x)+"=0x"+sends[x][9:17]+";\n"
                 code=code+"kernelCopyData((unsigned char *) 0x"+sends[x][:8].replace("1600","1003")+",(unsigned char *)&value"+str(x)+",sizeof(value"+str(x)+"));\n"
 
-with open("elf\\src\\tcpgecko\\tcp_gecko.cpp") as f:
+with open("elf/src/tcpgecko/tcp_gecko.cpp") as f:
     s=f.read()
     f.close()
 
 sa=s[s.index("// Start ShineClient")+21:s.index("// End ShineClient")]
 s=s.replace(sa,code)
 
-with open("elf\\src\\tcpgecko\\tcp_gecko.cpp",'w') as f:
+with open("elf/src/tcpgecko/tcp_gecko.cpp",'w') as f:
     f.write(s)
     f.close()
 
-popen = subprocess.Popen('elf\\build.bat',shell=True)
+popen = subprocess.Popen('elf/build.bat',shell=True)
 popen.wait()
 
 print("Elf Builded!")
